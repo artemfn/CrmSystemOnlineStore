@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace CrmSystem.BL.Model
 {
+    /// <summary>
+    /// Implements a model of working of all functions of the application.
+    /// </summary>
     public class ComputerModel
     {
         private readonly ObjectGenerator _generator = new ObjectGenerator();
@@ -13,7 +16,9 @@ namespace CrmSystem.BL.Model
 
         private bool _isWorking;
 
-
+        /// <summary>
+        /// Implements started setting.
+        /// </summary>
         public ComputerModel()
         {
             CustomersProgressingSpeed = 1;
@@ -38,13 +43,26 @@ namespace CrmSystem.BL.Model
             }
         }
 
-
+        /// <summary>
+        /// Determines a speed of progressing the stream of customers.
+        /// </summary>
         public int CustomersProgressingSpeed { get; set; }
+        /// <summary>
+        /// Determines a speed of progressing working cash desks.
+        /// </summary>
         public int CashDesksProgressingSpeed { get; set; }
+        /// <summary>
+        /// Determines the general list of active sellers.
+        /// </summary>
         public Queue<Seller> Sellers { get; private set; }
+        /// <summary>
+        /// Determines the general list of active cash desks.
+        /// </summary>
         public List<CashDesk> CashDesks { get; private set; }
 
-
+        /// <summary>
+        /// Starts a working of the model in async streams.
+        /// </summary>
         public void Start()
         {
             _isWorking = true;
@@ -60,6 +78,9 @@ namespace CrmSystem.BL.Model
             }
         }
 
+        /// <summary>
+        /// Stops a working of model.
+        /// </summary>
         public void Stop()
         {
             _isWorking = false;

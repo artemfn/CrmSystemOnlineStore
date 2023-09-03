@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace CrmSystem.BL.Model
 {
+    /// <summary>
+    /// Implements a generator of random system models.
+    /// </summary>
     public class ObjectGenerator
     {
         private readonly Random _random = new Random();
@@ -11,7 +14,9 @@ namespace CrmSystem.BL.Model
         private readonly List<Customer> _customers;
         private readonly List<Seller> _sellers;
 
-
+        /// <summary>
+        /// Implements started configurations setting.
+        /// </summary>
         public ObjectGenerator()
         {
             _products = new List<Product>();
@@ -19,13 +24,25 @@ namespace CrmSystem.BL.Model
             _sellers = new List<Seller>();
         }
 
-
+        /// <summary>
+        /// Determines the list of all generated objects of type <see cref="Product"/>.
+        /// </summary>
         public IEnumerable<Product> Products => _products;
+        /// <summary>
+        /// Determines the list of all generated objects of type <see cref="Customer"/>.
+        /// </summary>
         public IEnumerable<Customer> Customers => _customers;
+        /// <summary>
+        /// Determines the list of all generated objects of type <see cref="Seller"/>.
+        /// </summary>
         public IEnumerable<Seller> Sellers => _sellers;
-        
 
-
+        /// <summary>
+        /// Generates new objects of the type <see cref="Product"/>.
+        /// Adds them into the general list of their type.
+        /// </summary>
+        /// <param name="count">Quantity of generating objects.</param>
+        /// <returns>A list of new generated objects.</returns>
         public List<Product> GetNewProducts(uint count)
         {
             var result = new List<Product>();
@@ -47,6 +64,12 @@ namespace CrmSystem.BL.Model
             return result;
         }
 
+        /// <summary>
+        /// Generates new objects of the type <see cref="Customer"/>.
+        /// Adds them into the general list of their type.
+        /// </summary>
+        /// <param name="count">Quantity of generating objects.</param>
+        /// <returns>A list of new generated objects.</returns>
         public List<Customer> GetNewCustomers(uint count)
         {
             var result = new List<Customer>();
@@ -66,6 +89,12 @@ namespace CrmSystem.BL.Model
             return result;
         }
 
+        /// <summary>
+        /// Generates new objects of the type <see cref="Seller"/>.
+        /// Adds them into the general list of their type.
+        /// </summary>
+        /// <param name="count">Quantity of generating objects.</param>
+        /// <returns>A list of new generated objects.</returns>
         public List<Seller> GetNewSellers(uint count)
         {
             var result = new List<Seller>();
@@ -85,6 +114,14 @@ namespace CrmSystem.BL.Model
             return result;
         }
 
+        /// <summary>
+        /// Get a random quantity of objects from the general list of the type <see cref="Product"/>.
+        /// </summary>
+        /// <param name="from">Minimum quantity of objects.</param>
+        /// <param name="to">Maximum quantity of objects.</param>
+        /// <returns>A list of got objects.</returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ArgumentException"></exception>
         public List<Product> GetProducts(int from, int to)
         {
             if (from < 0)
@@ -109,6 +146,14 @@ namespace CrmSystem.BL.Model
             return result;
         }
 
+        /// <summary>
+        /// Get a random quantity of objects from the general list of the type <see cref="Customer"/>.
+        /// </summary>
+        /// <param name="from">Minimum quantity of objects.</param>
+        /// <param name="to">Maximum quantity of objects.</param>
+        /// <returns>A list of got objects.</returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ArgumentException"></exception>
         public List<Customer> GetCustomers(int from, int to)
         {
             if (from < 0)
@@ -133,6 +178,14 @@ namespace CrmSystem.BL.Model
             return result;
         }
 
+        /// <summary>
+        /// Get a random quantity of objects from the general list of the type <see cref="Seller"/>.
+        /// </summary>
+        /// <param name="from">Minimum quantity of objects.</param>
+        /// <param name="to">Maximum quantity of objects.</param>
+        /// <returns>A list of got objects.</returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ArgumentException"></exception>
         public List<Seller> GetSellers(int from, int to)
         {
             if (from < 0)

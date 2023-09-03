@@ -4,15 +4,28 @@ using CrmSystem.BL.Data;
 
 namespace CrmSystem.BL.Model
 {
+    /// <summary>
+    /// Implements the basic model of virtual entity CashDesk.
+    /// </summary>
     public class CashDesk
     {
         private readonly CrmContext _context;
         private readonly Queue<Cart> _queue;
 
-
+        /// <summary>
+        /// Implements an event of finishing work with the check.
+        /// </summary>
         public event EventHandler<Check> CheckClosed;
 
-
+        /// <summary>
+        /// Implements started setting.
+        /// Set the number of the cash desk.
+        /// Set the current seller.
+        /// Set the context for working with database. 
+        /// </summary>
+        /// <param name="number">A number of the cash desk.</param>
+        /// <param name="seller">A current seller.</param>
+        /// <param name="context">A database context.</param>
         public CashDesk(int number, Seller seller, CrmContext context)
         {
             IsComputerModel = true;
@@ -24,16 +37,42 @@ namespace CrmSystem.BL.Model
             Seller = seller ?? new Seller();
         }
 
-
+        /// <summary>
+        /// Defines that the class will work with database or not.
+        /// </summary>
         public bool IsComputerModel { get; set; }
+        /// <summary>
+        /// Defines the maximum quantity of the general list of carts.
+        /// </summary>
         public int MaxQueueLength { get; set; }
+        /// <summary>
+        /// Determines the quantity of leaved customers.
+        /// </summary>
         public int LeavedCustomers { get; private set; }
+        /// <summary>
+        /// Determines the of the cash desk.
+        /// </summary>
         public int Number { get; private set; }
+        /// <summary>
+        /// Determines the current seller.
+        /// </summary>
         public Seller Seller { get; private set; }
+        /// <summary>
+        /// Determines the general list of entities of type <see cref="Cart"/>.
+        /// </summary>
         public IEnumerable<Cart> Queue => _queue;
+        /// <summary>
+        /// Determines the quantity of customers.
+        /// </summary>
         public int QueueCount => _queue.Count;
 
-
+        /// <summary>
+        /// Add new cart into the general list of cats.
+        /// If an index of the cart is more than <see cref="MaxQueueLength"/> the customer leaves.
+        /// Else the customer will be added to queue.
+        /// </summary>
+        /// <param name="cart">New cart.</param>
+        /// <exception cref="ArgumentNullException"></exception>
         public void Enqueue(Cart cart)
         {
             if (cart == null)
@@ -49,6 +88,11 @@ namespace CrmSystem.BL.Model
             }
         }
 
+        /// <summary>
+        /// Remove a cart from the general list of cats.
+        /// Make new check and if <see cref="IsComputerModel"/> = false puts it to database.
+        /// </summary>
+        /// <returns>Full price of the check.</returns>
         public decimal Dequeue()
         {
             if (_queue.Count <= 0)
